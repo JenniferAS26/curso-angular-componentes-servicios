@@ -4,6 +4,11 @@
 <p>
   Total: ${{ total}}
 </p>
+<p> Today: {{ today | date:'short' }} </p>
+<p> Otra fecha: {{ date | date:'short' }} </p>
+<p>
+  {{ 'hOLA CoMo Esta tODo' | uppercase }}
+</p>
 <div class="cards-container">
   <app-product
     [product]="product"
