@@ -1,0 +1,15 @@
+.product-img {
+  width: 240px;
+  height: 240px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+@media (max-width: 640px) {
+  .product-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    object-fit: cover;
+  }
+}

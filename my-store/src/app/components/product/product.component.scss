@@ -1,14 +1,3 @@
-:root {
-  --very-light-pink: #c7c7c7;
-  --text-input-field: #f7f7f7;
-  --hospital-green: #acd982;
-  --white: #ffffff;
-  --black: #000000;
-  --sm: 14px;
-  --md: 16px;
-  --lg: 18px
-}
-
 .product-card {
   width: 240px;
 }
@@ -51,20 +40,7 @@
 }
 
 @media (max-width: 640px) {
-  .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 140px);
-    gap: 26px;
-  }
-
   .product-card {
     width: 140px;
-  }
-
-  .product-card img {
-    width: 140px;
-    height: 140px;
-    border-radius: 20px;
-    object-fit: cover;
   }
 }
