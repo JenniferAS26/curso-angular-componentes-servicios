@@ -5,9 +5,9 @@
   Total: ${{ total}}
 </p>
 <p> Today: {{ today | date:'short' }} </p>
-<p> Today: {{ today | timeAgo }} </p>
+<p appHighlight> Today: {{ today | timeAgo }} </p>
 <p> Otra fecha: {{ date | date:'short' }} </p>
-<p>
+<p appHighlight>
   {{ 'hOLA CoMo Esta tODo' | uppercase }}
 </p>
 <div class="cards-container">
