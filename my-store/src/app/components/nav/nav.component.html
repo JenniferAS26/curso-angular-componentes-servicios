@@ -28,7 +28,7 @@
   <div class="navbar-right">
     <ul>
       <li class="navbar-email">
-        <button *ngIf="!token; else elseBlock" (click)="login()" class="primary-button">Login</button>
+        <button *ngIf="!profile; else elseBlock" (click)="login()" class="primary-button">Login</button>
         <ng-template #elseBlock>{{ profile?.email }}</ng-template>
       </li>
       <li class="navbar-shopping-cart">
