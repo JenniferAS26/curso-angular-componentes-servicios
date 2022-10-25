@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { zip } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { Product, CreateProductDTO, UpdateProductDTO } from '../../models/product.model';
 
@@ -29,6 +31,7 @@ export class ProductsComponent implements OnInit {
   }
   limit = 10;
   offset = 0;
+  statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
   constructor(
     private storeService: StoreService,
@@ -55,10 +58,30 @@ export class ProductsComponent implements OnInit {
   }
 
   onShowDetail(id: string) {
+    this.statusDetail = 'loading';
+    this.toggleProductDetail();
     this.productsService.getProduct(id)
     .subscribe(data => {
-      this.toggleProductDetail();
       this.productChosen = data;
+      this.statusDetail = 'success';
+    }, errorMsg => {
+      window.alert(errorMsg);
+      this.statusDetail = 'error';
+    })
+  }
+
+  readAndUpdate(id: string) { // colocar esta logica en el servicio, no en el componente
+    this.productsService.getProduct(id)
+    .pipe(
+      switchMap((product) => this.productsService.update(product.id, {title: 'change'})) // depende una de otra
+    )
+    .subscribe(data => {
+      console.log(data);
+    });
+    this.productsService.fetchReadAndUpdate(id, {title: 'change'})
+    .subscribe(response => {
+      const read = response[0];
+      const update = response[1];
     })
   }
 

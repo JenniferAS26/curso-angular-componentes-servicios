@@ -5,6 +5,7 @@
   Total: ${{ total}}
 </p> -->
 <button (click)="createNewProduct()">create</button>
+<button (click)="onShowDetail('14526')">detalle not found</button>
 <div class="cards-container">
   <app-product
     [product]="product"
@@ -17,6 +18,7 @@
   Show more
 </button>
 <div class="product-detail" [class.active]="showProductDetail">
+  {{ statusDetail }}
   <div *ngIf="productChosen">
     <div (click)="toggleProductDetail()" class="product-detail-close">
       <img src="../assets/icons/icon_close.png" alt="close">

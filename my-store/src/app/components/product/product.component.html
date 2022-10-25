@@ -5,6 +5,7 @@
     <div>
       <p>{{ product.price | currency:'COP' }}</p>
       <p>{{ product.title }}</p>
+      <p>{{ product?.taxes | currency: 'COP' }}</p>
     </div>
     <button (click)="onShowDetail()">Show detail</button>
     <figure (click)="onAddToCart()">
