@@ -5,14 +5,15 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, AfterViewIni
   templateUrl: './img.component.html',
   styleUrls: ['./img.component.scss']
 })
-export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class ImgComponent /*implements OnInit, OnChanges, AfterViewInit, OnDestroy*/ {
 
   img: string = '';
 
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('img')
   set changeImg(newImg: string) {
     this.img = newImg;
-    console.log('change just img =>', this.img);
+    // console.log('change just img =>', this.img);
   }
   @Input() alt: string = '';
   @Output() loaded =  new EventEmitter<string>();
@@ -23,17 +24,17 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   constructor() {
     // before render
     // X async -- once time
-    console.log('constructor', 'imgValue =>', this.img);
+    // console.log('constructor', 'imgValue =>', this.img);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  /*ngOnChanges(changes: SimpleChanges) {
     // before - during render
     //changes inputs -- several times
     console.log('ngOnChanges', 'imgValue =>', this.img);
     console.log('changes', changes);
-  }
+  }*/
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     // before render
     // async - fetch/promesas/llamadas API -- once time
     console.log('ngOnInit', 'imgValue =>', this.img);
@@ -41,26 +42,26 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
     //   this.counter += 1;
     //   console.log('run counter');
     // }, 1000)
-  }
+  }*/
 
-  ngAfterViewInit() {
+  /*ngAfterViewInit() {
     // after render
     // handler children
     console.log('ngAfterViewInit');
-  }
+  }*/
 
-  ngOnDestroy() {
+  /*ngOnDestroy() {
     // detele component
     console.log('ngOnDestroy');
     // window.clearInterval(this.counterFn);
-  }
+  }*/
 
   imgError() {
     this.img = this.imageDefault;
   }
 
   imgLoad() {
-    console.log('Log hijo');
+    // console.log('Log hijo');
     this.loaded.emit(this.img);
   }
 

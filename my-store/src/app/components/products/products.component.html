@@ -1,19 +1,49 @@
-<p>
+<!-- <p>
   La cantidad {{ myShoppingCart.length }}
 </p>
 <p>
   Total: ${{ total}}
-</p>
-<p> Today: {{ today | date:'short' }} </p>
-<p appHighlight> Today: {{ today | timeAgo }} </p>
-<p> Otra fecha: {{ date | date:'short' }} </p>
-<p appHighlight>
-  {{ 'hOLA CoMo Esta tODo' | uppercase }}
-</p>
+</p> -->
+<button (click)="createNewProduct()">create</button>
+<button (click)="onShowDetail('14526')">detalle not found</button>
 <div class="cards-container">
   <app-product
     [product]="product"
     *ngFor="let product of products"
     (addedProduct)="onAddToShoppingCart($event)"
+    (showProduct)="onShowDetail($event)"
   ></app-product>
+</div>
+<button (click)="loadMore()" class="primary-button new-button">
+  Show more
+</button>
+<div class="product-detail" [class.active]="showProductDetail">
+  {{ statusDetail }}
+  <div *ngIf="productChosen">
+    <div (click)="toggleProductDetail()" class="product-detail-close">
+      <img src="../assets/icons/icon_close.png" alt="close">
+    </div>
+    <swiper
+      [slidesPerView]="1"
+    >
+      <ng-template *ngFor="let img of productChosen.images" swiperSlide>
+        <img [src]="img" alt="product">
+      </ng-template>
+    </swiper>
+    <div class="product-info" *ngIf="productChosen">
+        <p>{{ productChosen.price }}</p>
+        <p>{{ productChosen.title }}</p>
+        <p>{{ productChosen.description }}</p>
+    </div>
+    <button class="primary-button add-to-cart-button">
+        <img src="../assets/icons/bt_add_to_cart.svg" alt="add to cart">
+        Add to cart
+    </button>
+    <button (click)="updateProduct()" class="primary-button new-button">
+      Edit
+    </button>
+    <button (click)="deleteProduct()" class="primary-button new-button">
+      Delete
+    </button>
+  </div>
 </div>
