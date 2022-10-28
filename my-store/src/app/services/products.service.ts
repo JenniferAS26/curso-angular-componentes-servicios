@@ -35,7 +35,7 @@ export class ProductsService {
       params = params.set('limit', limit);
       params = params.set('offset', offset);
     }
-    return this.http.get<Product[]>(`${this.apiUrl}/products`, { params, context: checktime() })
+    return this.http.get<Product[]>(`${this.apiUrl}/products`, { params })
     .pipe(
       retry(3),
       map(products => products.map(item => {
@@ -66,7 +66,7 @@ export class ProductsService {
   }
 
   getProductsByPage(limit: number, offset: number) {
-    return this.http.get<Product[]>(`${this.apiUrl}`, {
+    return this.http.get<Product[]>(`${this.apiUrl}/products`, {
       params: { limit, offset }
     })
     .pipe(

@@ -6,22 +6,10 @@
     <img src="./assets/logos/logo_yard_sale.svg" alt="" class="logo" />
     <ul>
       <li>
-        <a href="/">All</a>
+        <a routerLinkActive="active" routerLink="home">All</a>
       </li>
-      <li>
-        <a href="/">Clothes</a>
-      </li>
-      <li>
-        <a href="/">Electronics</a>
-      </li>
-      <li>
-        <a href="/">Furnitures</a>
-      </li>
-      <li>
-        <a href="/">Toys</a>
-      </li>
-      <li>
-        <a href="/">Others</a>
+      <li *ngFor="let item of categories">
+        <a routerLinkActive="active" [routerLink]="['/category', item.id]">{{ item.name }}</a>
       </li>
     </ul>
   </div>
@@ -44,22 +32,10 @@
         <a href="/">CATEGORIES</a>
       </li>
       <li>
-        <a href="/">All</a>
+        <a routerLink="home">All</a>
       </li>
-      <li>
-        <a href="/">Clothes</a>
-      </li>
-      <li>
-        <a href="/">Electronics</a>
-      </li>
-      <li>
-        <a href="/">Furnitures</a>
-      </li>
-      <li>
-        <a href="/">Toys</a>
-      </li>
-      <li>
-        <a href="/">Others</a>
+      <li *ngFor="let item of categories">
+        <a [routerLink]="['/category', item.id]">{{ item.name }}</a>
       </li>
     </ul>
     <ul class="info">

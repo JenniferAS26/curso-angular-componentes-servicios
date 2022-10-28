@@ -37,5 +37,4 @@ export class CategoryComponent implements OnInit {
       this.products = data;
     });
   }
-
 }
