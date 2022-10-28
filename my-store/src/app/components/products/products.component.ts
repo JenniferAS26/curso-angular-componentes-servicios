@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-output-on-prefix */
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { zip } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -14,25 +15,21 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ProductsComponent {
 
-  myShoppingCart: Product[] = [];
-  total = 0;
   @Input() products: Product[] = [];
-  showProductDetail = false;
-  productChosen: Product = {
-    id: '',
-    title: '',
-    price: 0,
-    images: [],
-    description: '',
-    category: {
-      id: '',
-      name: ''
+  // @Input() productId: string | null = null;
+  @Input()
+  set productId(id: string | null) {
+    if (id) {
+      this.onShowDetail(id);
     }
   }
-  statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
-
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onLoadMore: EventEmitter<string> = new EventEmitter<string>();
+
+  myShoppingCart: Product[] = [];
+  total = 0;
+  showProductDetail = false;
+  productChosen: Product | null = null
+  statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
   constructor(
     private storeService: StoreService,
@@ -52,7 +49,9 @@ export class ProductsComponent {
 
   onShowDetail(id: string) {
     this.statusDetail = 'loading';
-    this.toggleProductDetail();
+    if (!this.showProductDetail) {
+      this.showProductDetail = true;
+    }
     this.productsService.getProduct(id)
     .subscribe(data => {
       this.productChosen = data;
@@ -94,25 +93,32 @@ export class ProductsComponent {
   }
 
   updateProduct() {
-    const changes: UpdateProductDTO = {
-      title: 'Nuevo titulo',
+    if (this.productChosen) {
+      const changes: UpdateProductDTO = {
+        title: 'change title',
+      };
+      const id = this.productChosen?.id;
+      this.productsService.update(id, changes).subscribe((data) => {
+        const productIndex = this.products.findIndex(
+          (item) => item.id === this.productChosen?.id
+        );
+        this.products[productIndex] = data;
+        this.productChosen = data;
+      });
     }
-    const id = this.productChosen.id;
-    this.productsService.update(id, changes)
-    .subscribe(data => {
-      const productIndex = this.products.findIndex(item => item.id === this.productChosen.id);
-      this.products[productIndex] = data;
-    });
   }
 
   deleteProduct() {
-    const id = this.productChosen.id;
-    this.productsService.delete(id)
-    .subscribe(() => {
-      const productIndex = this.products.findIndex(item => item.id === this.productChosen.id);
-      this.products.splice(productIndex, 1);
-      this.showProductDetail = false;
-    });
+    if (this.productChosen) {
+      const id = this.productChosen?.id;
+      this.productsService.delete(id).subscribe(() => {
+        const productIndex = this.products.findIndex(
+          (item) => item.id === this.productChosen?.id
+        );
+        this.products.splice(productIndex, 1);
+        this.showProductDetail = false;
+      });
+    }
   }
 
   loadMore() {

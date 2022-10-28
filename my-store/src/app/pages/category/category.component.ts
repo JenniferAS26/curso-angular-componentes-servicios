@@ -6,7 +6,7 @@ import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-category',
-  template: `<app-products [products]="products"></app-products>`,
+  template: `<app-products [productId]="productId" [products]="products"></app-products>`,
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
@@ -15,6 +15,7 @@ export class CategoryComponent implements OnInit {
   products: Product[] = [];
   limit = 10;
   offset = 0;
+  productId: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,5 +37,19 @@ export class CategoryComponent implements OnInit {
     .subscribe((data) => {
       this.products = data;
     });
+
+    this.route.queryParamMap.subscribe((params) => {
+      this.productId = params.get('product');
+    });
+  }
+
+  loadMore(): void {
+    if (this.categoryId){
+    this.productsServices.getByCategory(this.categoryId, this.limit, this.offset)
+      .subscribe(data => {
+        this.products = this.products.concat(data.filter(product => product.images.length > 0));
+        this.offset += this.limit;
+      });
+    }
   }
 }

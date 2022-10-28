@@ -50,6 +50,17 @@
   color: var(--very-light-pink);
   font-size: var(--sm);
   margin-right: 12px;
+  .login-button {
+    background-color: var(--hospital-green);
+    border-radius: 8px;
+    border: none;
+    color: var(--white);
+    width: 100%;
+    height: 35px;
+    cursor: pointer;
+    font-size: var(--md);
+    font-weight: bold;
+  }
 }
 
 .navbar-shopping-cart {

@@ -39,6 +39,13 @@
   color: var(--very-light-pink);
 }
 
+.product-info div p:nth-child(3) {
+  font-size: var(--sd);
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--hospital-green);
+}
+
 @media (max-width: 640px) {
   .product-card {
     width: 140px;

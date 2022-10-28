@@ -1,18 +1,23 @@
 <div class="product-card">
   <a [routerLink]="['/product', product.id]">
-    <app-img *ngIf="product.images.length > 0" [img]="product.images[0]"></app-img>
+    <app-img
+      *ngIf="product.images.length > 0"
+      [img]="product.images[0]"
+    ></app-img>
   </a>
   <div class="product-info">
     <div>
-      <p>{{ product.price | currency:'COP' }}</p>
+      <p>{{ product.price | currency: "COP" }}</p>
       <p>{{ product.title }}</p>
       <p>{{ product.category.name }}</p>
       <!-- <p>{{ product?.taxes | currency: 'COP' }}</p> -->
     </div>
-    <button (click)="onShowDetail()">Show detail</button>
+    <!-- <button (click)="onShowDetail()">Show detail</button> -->
+    <a routerLink="." [queryParams]="{ product: product.id }"
+      >Ver detalle</a
+    >
     <figure (click)="onAddToCart()">
       <img src="../../../assets/icons/bt_add_to_cart.svg" alt="" />
     </figure>
   </div>
 </div>
-

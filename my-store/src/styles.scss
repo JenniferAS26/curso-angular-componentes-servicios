@@ -16,6 +16,11 @@
   --lg: 18px;
 }
 
+a {
+  text-decoration: none;
+  color: var(--hospital-green);
+}
+
 .primary-button {
   background-color: var(--hospital-green);
   border-radius: 8px;
